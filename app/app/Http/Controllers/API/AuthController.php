@@ -30,7 +30,7 @@ class AuthController extends Controller
             return response()->json(['user' => $user, 'token' => $token], 200);
         }
 
-        return response()->json(['error' => 'Invalid credentials'], 401);
+        return response()->json(['error' => 'Invalid credentials'], 400);
     }
 
     public function logout()
