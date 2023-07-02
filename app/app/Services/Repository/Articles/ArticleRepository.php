@@ -2,21 +2,22 @@
 namespace App\Services\Repository\Articles;
 
 use App\Models\Articles;
+use App\Services\Object\Articles\FilterArticles;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
-    public function list(array $params): LengthAwarePaginator
+    public function list(FilterArticles $params): LengthAwarePaginator
     {
-        $language = $params['params']['language'] ?? '';
-        $source_id = $params['params']['source_id'] ?? '';
-        $author_id = $params['params']['author_id'] ?? '';
-        $category_id = $params['params']['category_id'] ?? '';
-        $tag_id = $params['params']['tag_id'] ?? '';
-        $description = $params['params']['description'] ?? '';
-        $start_date = $params['params']['start_date'] ? Carbon::parse($params['params']['start_date'])->startOfDay():  '';
-        $end_date = $params['params']['end_date'] ? Carbon::parse($params['params']['end_date'])->startOfDay():  '';
+        $language = $params->language;
+        $source_id = $params->source_id;
+        $author_id = $params->author_id;
+        $category_id = $params->category_id;
+        $tag_id = $params->tag_id;
+        $description = $params->description;
+        $start_date = $params->start_date;
+        $end_date = $params->end_date;
         $query = Articles::with([
             'infos' => function($query) use($language){
                 if($language) $query->where(['lang' => $language ]);

@@ -1,5 +1,7 @@
 <?php
 namespace App\Services\Repository\Articles;
+
+use App\Services\Object\Articles\FilterArticles;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface ArticleRepositoryInterface
@@ -7,8 +9,8 @@ interface ArticleRepositoryInterface
     /**
      * list
      *
-     * @param  array $params
+     * @param  FilterArticles $params
      * @return LengthAwarePaginator
      */
-    public function list(array $params) :LengthAwarePaginator;
+    public function list(FilterArticles $params) :LengthAwarePaginator;
 }
